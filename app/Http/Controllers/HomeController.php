@@ -10,10 +10,14 @@ class HomeController extends Controller
 {
     public function index() {
         $menuItems = MenuItem::where('product_type', ProductType::PROMOTION)->get();
-        return view('home.index', compact('menuItems'));
+        return view('promotion.index', compact('menuItems'));
     }
 
     public function about() {
-        return view('about.index');
+        if (auth()->check()) {
+            return view('about.index', ['user' => auth()->user()]);
+        } else {
+            return view('about.index');
+        }
     }
 }
