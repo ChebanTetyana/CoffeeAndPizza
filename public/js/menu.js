@@ -17,25 +17,39 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
 
             let productId = this.dataset.productId;
+            let productType = this.dataset.productType;
             let sizeSelect = this.closest('.card-body').querySelector('.size-select');
-            let size = sizeSelect ? sizeSelect.value : 'M';
-            let price = sizeSelect ? sizeSelect.closest('.card-body').querySelector('.card-price').textContent.replace('Price: $', '') : '3.00';
+            let size = sizeSelect ? sizeSelect.value : null;
+            let price = productType === 'promotion' ? 6.00 : this.dataset.price;
+            let userIdMeta = document.querySelector('meta[name="user-id"]');
+            let userId = userIdMeta ? userIdMeta.getAttribute('content') : null;
 
+            let requestData = {
+                product_id: productId,
+                size: size,
+                price: price,
+            };
+
+            // if (size) {
+            //     requestData.size = size;
+            // }
+
+            if (userId) {
+                requestData.user_id = userId;
+            }
+            console.log('Request Data:', requestData); // Отладка данных запроса
             fetch('/cart/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({
-                    product_id: productId,
-                    size: size,
-                    price: price
-                })
+                body: JSON.stringify(requestData)
             })
                 .then(response => {
                     if (response.ok) {
                         updateCartState();
+                        // console.log('Response OK');
                     } else {
                         console.error('Error:', response.status);
                     }
@@ -44,6 +58,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.error('Error:', error);
                 });
         });
+    });
+
+    document.getElementById('logout-button').addEventListener('click', function() {
+        let userIdMeta = document.querySelector('meta[name="user-id"]');
+        if (userIdMeta) {
+            userIdMeta.remove();
+        }
+        document.getElementById('logout-form').submit();
     });
 });
 

@@ -4,12 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Enums\ProductType;
 use App\Models\MenuItem;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
     public function index() {
-        return view('menu.index');
+        $pizzas = MenuItem::where('product_type', ProductType::PIZZA)
+            ->where('size', 'M')
+            ->get();
+        $coffees = MenuItem::where('product_type', ProductType::COFFEE)
+            ->where('size', 'M')
+            ->get();
+        $promotions = MenuItem::where('product_type', ProductType::PROMOTION)->get();
+
+        return view('menu.index', compact('pizzas', 'coffees', 'promotions'));
     }
 
     public function getPizzas()
