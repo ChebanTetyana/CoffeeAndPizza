@@ -26,6 +26,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('orders')
                 ->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
         });
     }
