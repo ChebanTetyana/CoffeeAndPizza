@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     let price = data.price;
                     let cardBody = this.closest('.card-body');
                     cardBody.querySelector('.card-price').textContent = 'Price: $' + price;
+                    cardBody.querySelector('.addToCart').dataset.price = price;
                 });
         });
     });
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let productType = this.dataset.productType;
             let sizeSelect = this.closest('.card-body').querySelector('.size-select');
             let size = sizeSelect ? sizeSelect.value : null;
-            let price = productType === 'promotion' ? 6.00 : this.dataset.price;
+            let price = this.dataset.price;
             let userIdMeta = document.querySelector('meta[name="user-id"]');
             let userId = userIdMeta ? userIdMeta.getAttribute('content') : null;
 
@@ -30,14 +31,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 price: price,
             };
 
-            // if (size) {
-            //     requestData.size = size;
-            // }
-
             if (userId) {
                 requestData.user_id = userId;
             }
-            console.log('Request Data:', requestData); // Отладка данных запроса
+
             fetch('/cart/add', {
                 method: 'POST',
                 headers: {
@@ -49,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(response => {
                     if (response.ok) {
                         updateCartState();
-                        // console.log('Response OK');
                     } else {
                         console.error('Error:', response.status);
                     }

@@ -36,8 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
             let pricePerItem = parseFloat(pricePerItemElement.textContent.replace(/[^\d.]/g, ''));
             totalPriceElement.textContent = (pricePerItem * count).toFixed(2);
         }
-
-        // fetch(`/cart/update/${id}?count=${count}`, { method: 'POST' });
     }
 
     function updateTotalOrderPrice() {
@@ -48,8 +46,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.getElementById('totalPrice').textContent = 'Total price: ' + totalPrice.toFixed(2);
     }
-
-
-
 });
 

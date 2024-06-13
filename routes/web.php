@@ -41,11 +41,6 @@ Route::group(['middleware'=>'guest'], function (){
     Route::post('/register', [AuthController::class, 'registerPost'])->name('register');
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'loginPost'])->name('login');
-//    Route::get('/about', [HomeController::class, 'about'])->name('about.index');
 });
+
 Route::get('/about', [HomeController::class, 'about'])->name('about.index');
-
-
-
-
-

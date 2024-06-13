@@ -10,6 +10,7 @@ class HomeController extends Controller
 {
     public function index() {
         $menuItems = MenuItem::where('product_type', ProductType::PROMOTION)->get();
+
         return view('promotion.index', compact('menuItems'));
     }
 

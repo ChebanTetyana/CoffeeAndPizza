@@ -1,7 +1,6 @@
 @extends('layouts.layout')
 @section('title', 'About')
 @section('content')
-{{--    @dd(111)--}}
     <div class="about">
         <div class="container-custom p-4">
             <div class="mt-3 mb-4">
@@ -30,4 +29,3 @@
         </div>
     </div>
 @endsection
-

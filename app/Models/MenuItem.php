@@ -13,8 +13,4 @@ class MenuItem extends Product
     protected $fillable = [
         'description'
     ];
-
-//    protected $attributes = [
-//        'product_type' => ProductType::PIZZA,
-//    ];
 }

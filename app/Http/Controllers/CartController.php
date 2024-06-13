@@ -15,8 +15,6 @@ class CartController extends Controller
 
         $user = Auth::user();
         $cartItems = OrderItem::whereNull('order_id')->where('user_id', $user->id)->get();
-//        dd($cartItems);
-//        $cartItems = OrderItem::whereNull('order_id')->get();
 
         $totalPrice = $cartItems->sum(function($item) {
             return $item->price * $item->count;
@@ -37,10 +35,8 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
-//        dd($request);
         $user = Auth::user();
 
-//        dd('User authenticated:', $user);
         $validatedData = $request->validate([
             'product_id' => 'required|exists:menu_items,id',
             'size' => 'nullable',
@@ -49,18 +45,13 @@ class CartController extends Controller
 
 
         $productId = $validatedData['product_id'];
-//        dd($validatedData);
         $size = $validatedData['size'];
-//        dd($validatedData);
-
         $price = $validatedData['price'];
-//        dd($validatedData);
         $product = MenuItem::find($productId);
         if (!$product) {
-//            dd($validatedData);
             return response()->json(['message' => 'Product not found'], 404);
         }
-//        dd($product);
+
         $order_id = null;
         $cartItem = new OrderItem();
         $cartItem->name = $product->name;
@@ -72,9 +63,8 @@ class CartController extends Controller
         $cartItem->count = 1;
         $cartItem->user_id = $user->id;
 
-//        dd($cartItem);
         $cartItem->save();
-//        dd($cartItem);
+
         return redirect()->route('cart.index');
     }
 
@@ -86,6 +76,7 @@ class CartController extends Controller
         }
 
         $count = OrderItem::whereNull('order_id')->where('user_id', $user->id)->count();
+
         return response()->json(['count' => $count]);
     }
 
