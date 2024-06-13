@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-{{--    <meta name="user-id" content="{{ auth()->user()->id }}">--}}
     @if (auth()->check())
         <meta name="user-id" content="{{ auth()->user()->id }}">
     @endif
@@ -14,6 +13,10 @@
           rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     @auth
         <script src="{{ asset('js/cartState.js') }}"></script>
     @endauth
@@ -81,6 +84,15 @@
         background-position: center;
         padding: 50px;
         height: 100vh;
+        /*filter: blur(10px);*/
+
+    }
+
+    .content {
+        position: relative;
+        z-index: 1;
+        padding: 20px;
+        background: rgb(228 154 50 / 80%);
     }
     .cart-icon {
         position: relative;
@@ -167,17 +179,11 @@
             </div>
         </div>
     </nav>
-{{--    @auth--}}
-{{--    <div class="container-custom">--}}
-{{--        <h1>Welcome, {{ Auth::user()->name }}</h1>--}}
-{{--    </div>--}}
-{{--    @endauth--}}
     @yield('content')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
+    @stack('scripts')
 
 </body>
 </html>
-
-

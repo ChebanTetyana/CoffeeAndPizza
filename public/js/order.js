@@ -1,15 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let createOrderButton = document.getElementById('createOrderButton');
-
-    function toggleCreateOrderButton() {
-        if (document.querySelectorAll('.count').length > 0) {
-            createOrderButton.style.display = 'block';
-        } else {
-            createOrderButton.style.display = 'none';
-        }
-    }
-
-    toggleCreateOrderButton();
+    configureToastr();
+    setupCreateOrderButton();
 
     const observer = new MutationObserver(toggleCreateOrderButton);
     const targetNode = document.querySelector('.table tbody');
@@ -17,14 +8,52 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(targetNode, { childList: true, subtree: true });
     }
 
-    createOrderButton.addEventListener('click', function() {
+    function configureToastr() {
+        toastr.options = {
+            closeButton: true,
+            debug: false,
+            newestOnTop: false,
+            progressBar: true,
+            positionClass: "toast-top-right",
+            preventDuplicates: false,
+            onclick: null,
+            showDuration: "300",
+            hideDuration: "1000",
+            timeOut: "5000",
+            extendedTimeOut: "2000",
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut"
+        };
+    }
+
+    function setupCreateOrderButton() {
+        let createOrderButton = document.getElementById('createOrderButton');
+        toggleCreateOrderButton();
+
+        createOrderButton.addEventListener('click', function() {
+            createOrder();
+        });
+    }
+
+    function toggleCreateOrderButton() {
+        let createOrderButton = document.getElementById('createOrderButton');
+        if (document.querySelectorAll('.count').length > 0) {
+            createOrderButton.style.display = 'block';
+        } else {
+            createOrderButton.style.display = 'none';
+        }
+    }
+
+    function createOrder() {
         let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
         let cartItems = [];
         let totalPrice = 0;
         let items = document.querySelectorAll('.table tbody tr');
-        items.forEach(item => {
 
+        items.forEach(item => {
             let count = parseInt(item.querySelector('.count').textContent.trim());
             let price = parseInt(item.querySelector('.price-per-item').textContent.trim());
             let id = item.dataset.id;
@@ -57,29 +86,44 @@ document.addEventListener('DOMContentLoaded', function() {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
-                let orderDetailsDiv = document.getElementById('orderDetails');
-                let orderDetails = `
-                <p>Order ID: ${data.order_id}</p>
-                <p>Total Price: $${totalPrice.toFixed(2)}</p>
-                <ul>
-            `;
-                cartItems.forEach(item => {
-                    orderDetails += `<li>${item.name} - ${item.count} x $${item.price.toFixed(2)}</li>`;
-                });
-                orderDetails += `</ul>`;
-
-                orderDetailsDiv.innerHTML = orderDetails;
-
-                let modalOkButton = document.getElementById('modalOkButton');
-                modalOkButton.addEventListener('click', function() {
-                    window.location.reload();
-                });
+                displayOrderDetails(data, cartItems, totalPrice);
             })
-
             .catch(error => {
                 console.error('Error:', error);
-                alert('Error creating order: ' + error.message);
+                toastr.error('Error creating order: ' + error.message, 'Error', {
+                    closeButton: true,
+                    progressBar: true
+                });
             });
-    });
+    }
+
+    function displayOrderDetails(data, cartItems, totalPrice) {
+        let orderDetailsDiv = document.getElementById('orderDetails');
+        let orderDetails = `
+            <p>Order ID: ${data.order_id}</p>
+            <p>Total Price: $${totalPrice.toFixed(2)}</p>
+            <ul>
+        `;
+        cartItems.forEach(item => {
+            orderDetails += `<li>${item.name} - ${item.count} x $${item.price.toFixed(2)}</li>`;
+        });
+        orderDetails += `</ul>`;
+
+        orderDetailsDiv.innerHTML = orderDetails;
+
+        let modalOkButton = document.getElementById('modalOkButton');
+        modalOkButton.addEventListener('click', function() {
+            $('#orderModal').modal('hide');
+                toastr.success('Your order has been successfully placed!', 'Success', {
+                    closeButton: true,
+                    progressBar: true,
+                    timeOut: 5000,
+                    extendedTimeOut: 2000
+                });
+
+            setTimeout(function() {
+                window.location.reload();
+            }, 5000);
+        });
+    }
 });
