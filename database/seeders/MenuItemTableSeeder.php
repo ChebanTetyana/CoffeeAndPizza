@@ -46,7 +46,7 @@ class MenuItemTableSeeder extends Seeder
             'description' => 'Fresh mushrooms, prosciutto ham, artichoke hearts and mozzarella on organic tomato sauce.',
             'size' => 'S',
             'price' => 2.00,
-            'image' => 'pizza_1.jpg',
+            'image' => 'pizza_2.jpg',
             'product_type' => ProductType::PIZZA,
         ]);
         MenuItem::create([
@@ -54,7 +54,7 @@ class MenuItemTableSeeder extends Seeder
             'description' => 'Fresh mushrooms, prosciutto ham, artichoke hearts and mozzarella on organic tomato sauce.',
             'size' => 'M',
             'price' => 3.00,
-            'image' => 'pizza_1.jpg',
+            'image' => 'pizza_2.jpg',
             'product_type' => ProductType::PIZZA,
         ]);
 
@@ -63,7 +63,7 @@ class MenuItemTableSeeder extends Seeder
             'description' => 'Fresh mushrooms, prosciutto ham, artichoke hearts and mozzarella on organic tomato sauce.',
             'size' => 'L',
             'price' => 5.00,
-            'image' => 'pizza_1.jpg',
+            'image' => 'pizza_2.jpg',
             'product_type' => ProductType::PIZZA,
         ]);
 
@@ -72,7 +72,7 @@ class MenuItemTableSeeder extends Seeder
             'description' => 'Combination of four kinds of cheese, usually melted together, tomato or bianca sauce',
             'size' => 'S',
             'price' => 2.00,
-            'image' => 'pizza_1.jpg',
+            'image' => 'pizza_3.jpg',
             'product_type' => ProductType::PIZZA,
         ]);
 
@@ -81,7 +81,7 @@ class MenuItemTableSeeder extends Seeder
             'description' => 'Combination of four kinds of cheese, usually melted together, tomato or bianca sauce',
             'size' => 'M',
             'price' => 3.00,
-            'image' => 'pizza_1.jpg',
+            'image' => 'pizza_3.jpg',
             'product_type' => ProductType::PIZZA,
         ]);
 
@@ -90,7 +90,7 @@ class MenuItemTableSeeder extends Seeder
             'description' => 'Combination of four kinds of cheese, usually melted together, tomato or bianca sauce',
             'size' => 'L',
             'price' => 5.00,
-            'image' => 'pizza_1.jpg',
+            'image' => 'pizza_3.jpg',
             'product_type' => ProductType::PIZZA,
         ]);
 
@@ -99,7 +99,7 @@ class MenuItemTableSeeder extends Seeder
             'description' => 'Tomatoes, fresh mozzarella cheese, fresh basil, and olive oil',
             'size' => 'S',
             'price' => 2.00,
-            'image' => 'pizza_1.jpg',
+            'image' => 'pizza_4.jpg',
             'product_type' => ProductType::PIZZA,
         ]);
 
@@ -108,7 +108,7 @@ class MenuItemTableSeeder extends Seeder
             'description' => 'Tomatoes, fresh mozzarella cheese, fresh basil, and olive oil',
             'size' => 'M',
             'price' => 3.00,
-            'image' => 'pizza_1.jpg',
+            'image' => 'pizza_4.jpg',
             'product_type' => ProductType::PIZZA,
         ]);
 
@@ -117,7 +117,7 @@ class MenuItemTableSeeder extends Seeder
             'description' => 'Tomatoes, fresh mozzarella cheese, fresh basil, and olive oil',
             'size' => 'L',
             'price' => 5.00,
-            'image' => 'pizza_1.jpg',
+            'image' => 'pizza_4.jpg',
             'product_type' => ProductType::PIZZA,
         ]);
 
@@ -127,7 +127,7 @@ class MenuItemTableSeeder extends Seeder
              resulting in a drink of similar volume and strength to regular coffee',
             'size' => 'M',
             'price' => 2.00,
-            'image' => 'cappuccino.jpg',
+            'image' => 'coffee_1.jpg',
             'product_type' => ProductType::COFFEE,
         ]);
 
@@ -137,7 +137,7 @@ class MenuItemTableSeeder extends Seeder
             resulting in a drink of similar volume and strength to regular coffee',
             'size' => 'L',
             'price' => 3.00,
-            'image' => 'cappuccino.jpg',
+            'image' => 'coffee_1.jpg',
             'product_type' => ProductType::COFFEE,
         ]);
 
@@ -146,7 +146,7 @@ class MenuItemTableSeeder extends Seeder
             'description' => 'An espresso-based drink in which you only add milk to the traditional Americano',
             'size' => 'M',
             'price' => 2.00,
-            'image' => 'cappuccino.jpg',
+            'image' => 'coffee_2.jpg',
             'product_type' => ProductType::COFFEE,
         ]);
 
@@ -155,7 +155,7 @@ class MenuItemTableSeeder extends Seeder
             'description' => 'An espresso-based drink in which you only add milk to the traditional Americano',
             'size' => 'L',
             'price' => 3.00,
-            'image' => 'cappuccino.jpg',
+            'image' => 'coffee_2.jpg',
             'product_type' => ProductType::COFFEE,
         ]);
 
@@ -191,7 +191,7 @@ class MenuItemTableSeeder extends Seeder
             'description' => 'The perfect balance of espresso, steamed milk and foam',
             'size' => null,
             'price' => 6.00,
-            'image' => 'promotion.jpg',
+            'image' => 'promotion_1.jpg',
             'product_type' => ProductType::PROMOTION,
         ]);
     }
